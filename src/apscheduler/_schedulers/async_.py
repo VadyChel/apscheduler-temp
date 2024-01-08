@@ -995,4 +995,7 @@ class AsyncScheduler:
             finally:
                 current_job.reset(token)
         finally:
-            self._running_jobs.remove(job.id)
+            try:
+                self._running_jobs.remove(job.id)
+            except KeyError:
+                pass
